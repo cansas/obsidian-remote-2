@@ -2,7 +2,7 @@ FROM ghcr.io/linuxserver/baseimage-kasmvnc:debianbullseye
 
 LABEL maintainer="github@sytone.com" \
       org.opencontainers.image.authors="github@sytone.com" \
-      org.opencontainers.image.source="https://github.com/sytone/obsidian-remote" \
+      org.opencontainers.image.source="https://github.com/cansas/obsidian-remote" \
       org.opencontainers.image.title="Container hosted Obsidian MD" \
       org.opencontainers.image.description="Hosted Obsidian instance allowing access via web browser"
 
@@ -21,7 +21,7 @@ RUN echo "**** download obsidian ****" && \
     dpkg -i obsidian.deb
 
 # Environment variables
-ENV CUSTOM_PORT="8080" \
+ENV CUSTOM_PORT="8888" \
     CUSTOM_HTTPS_PORT="8443" \
     CUSTOM_USER="" \
     PASSWORD="" \
@@ -31,8 +31,8 @@ ENV CUSTOM_PORT="8080" \
 
 # Add local files
 COPY root/ /
-EXPOSE 8080 8443
+EXPOSE 8888 8443
 VOLUME ["/config","/vaults"]
 
 # Define a healthcheck
-HEALTHCHECK CMD curl --fail http://localhost:8080/ || exit 1
+HEALTHCHECK CMD curl --fail http://localhost:8888/ || exit 1
